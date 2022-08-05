@@ -17,4 +17,4 @@
     <p> 3. To restart game/score press - 'R' </p>
 </div>
 
-<div style='text-align:right; color:DeepSkyBlue;' > Source: <a> https://www.youtube.com/watch?v=k2EahPgl0ho </a> </div>
+<div style='text-align:right; color:DeepSkyBlue;' > Source: <a href="https://www.youtube.com/watch?v=k2EahPgl0ho"> Youtube Video </a> </div>
