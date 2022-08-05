@@ -2,6 +2,7 @@ import cv2
 import cvzone
 from cvzone.HandTrackingModule import HandDetector
 import time
+import random
 
 cap = cv2.VideoCapture(0)
 cap.set(3, 640)
@@ -45,11 +46,18 @@ while True:
                         player_move = 2
                     if fingers == SCISSOR:
                         player_move = 3
-                        
+                    
+                    
+                    ai_choice = random.choice(['rock', 'paper', 'scissor'])
+                    img_ai = cv2.imread(f'Resources/{ai_choice}.png', cv2.IMREAD_UNCHANGED)    
+                    img_bg = cvzone.overlayPNG(img_bg,img_ai,(149,310))
+                    
                     print(player_move)
     
     img_bg[234:654,795:1195] = img_scaled
 
+    if state_result:
+        img_bg = cvzone.overlayPNG(img_bg,img_ai,(149,310))
     
     
     cv2.imshow("BG", img_bg)
@@ -58,3 +66,4 @@ while True:
     if key == ord('s'):
         start_game = True
         initial_time = time.time()
+        state_result = False
