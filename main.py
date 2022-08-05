@@ -18,6 +18,10 @@ while True:
     
     hands, img = detector.findHands(imgScaled)
     
+    if hands:
+        hand = hands[0]
+        fingers = detector.fingersUp(hand)
+    
     imgBG[234:654,795:1195] = imgScaled
 
     
