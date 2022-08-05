@@ -17,6 +17,7 @@ detector = HandDetector(maxHands=1)
 timer = 0
 state_result = False
 start_game = False
+scores = [0, 0]
 
 while True:
     img_bg = cv2.imread("Resources/BG.png")
@@ -52,13 +53,24 @@ while True:
                     img_ai = cv2.imread(f'Resources/{ai_choice}.png', cv2.IMREAD_UNCHANGED)    
                     img_bg = cvzone.overlayPNG(img_bg,img_ai,(149,310))
                     
-                    print(player_move)
+                    if (player_move == 1 and ai_choice == 'scissor') or \
+                        (player_move == 2 and ai_choice == 'rock') or \
+                        (player_move == 3 and ai_choice == 'paper'):
+                            scores[1] += 1
+                    
+                    if (player_move == 2 and ai_choice == 'scissor') or \
+                        (player_move == 3 and ai_choice == 'rock') or \
+                        (player_move == 1 and ai_choice == 'paper'):
+                            scores[0] += 1
     
     img_bg[234:654,795:1195] = img_scaled
 
     if state_result:
         img_bg = cvzone.overlayPNG(img_bg,img_ai,(149,310))
     
+    
+    cv2.putText(img_bg, str(scores[0]), (410, 215), cv2.FONT_HERSHEY_PLAIN,4,(255,255,255),8)
+    cv2.putText(img_bg, str(scores[1]), (1112, 215), cv2.FONT_HERSHEY_PLAIN,4,(255,255,255),8)
     
     cv2.imshow("BG", img_bg)
     
