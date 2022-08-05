@@ -32,7 +32,7 @@ while True:
         
         if state_result is False:
             timer = time.time() - initial_time
-            cv2.putText(img_bg, str(int(timer)), (604, 435), cv2.FONT_HERSHEY_PLAIN,6,(255,0,255),16)
+            cv2.putText(img_bg, str(int(timer)), (604, 435), cv2.FONT_HERSHEY_PLAIN,6,(0,0,255),16)
 
             if timer > 3:
                 state_result = True
@@ -72,10 +72,22 @@ while True:
     cv2.putText(img_bg, str(scores[0]), (410, 215), cv2.FONT_HERSHEY_PLAIN,4,(255,255,255),8)
     cv2.putText(img_bg, str(scores[1]), (1112, 215), cv2.FONT_HERSHEY_PLAIN,4,(255,255,255),8)
     
+    if scores[1] == 3:
+        cv2.putText(img_bg, 'Player WINS', (350, 400), cv2.FONT_HERSHEY_PLAIN,6,(0,0,255),8)
+        cv2.putText(img_bg, 'Restart game "R"', (400, 500), cv2.FONT_HERSHEY_PLAIN,3,(0,0,255),6)
+    if scores[0] == 3:
+        cv2.putText(img_bg, 'AI WINS', (440, 400), cv2.FONT_HERSHEY_PLAIN,6,(0,0,255),8)
+        cv2.putText(img_bg, 'Restart game "R"', (400, 500), cv2.FONT_HERSHEY_PLAIN,3,(0,0,255),6)
+        
     cv2.imshow("BG", img_bg)
     
     key = cv2.waitKey(1)
     if key == ord('s'):
+        start_game = True
+        initial_time = time.time()
+        state_result = False
+    if key == ord('r'):
+        scores = [0,0]
         start_game = True
         initial_time = time.time()
         state_result = False
